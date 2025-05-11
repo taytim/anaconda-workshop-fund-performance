@@ -1,5 +1,6 @@
 import logging
 from models.config import Config
+import re
 import sqlite3
 import yaml
 
@@ -22,7 +23,6 @@ class Utils:
         """
         with open(config_path, "r") as file:
             config_data = yaml.safe_load(file)
-            print(config_data)
         return Config(**config_data)
 
     @staticmethod
@@ -63,3 +63,16 @@ class Utils:
         conn = sqlite3.connect(database_path)
         logger.info(f"Connected to the database at {database_path}")
         return conn
+
+    @staticmethod
+    def convert_to_screaming_snake_case(input: str) -> str:
+        """
+        Convert a string to screaming snake case.
+
+        Args:
+            input (str): String to convert.
+
+        Returns:
+            str: The converted string in screaming snake case.
+        """
+        return re.sub(r"[^\w]+", "_", input.upper())

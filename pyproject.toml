@@ -8,9 +8,12 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.13"
-polars ="^1.29.0"
 pydantic = "^2.11.4"
 pytest-cov = "^6.1.1"
+pandera = {extras = ["polars"], version = "^0.23.1"}
+polars-lts-cpu = "^1.29.0"
+sqlalchemy = "^2.0.40"
+pyarrow = "^20.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"

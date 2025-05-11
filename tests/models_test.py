@@ -5,7 +5,12 @@ from models.config import Config
 
 def test_valid_config():
     """Test valid config"""
-    valid_config = {"database_path": "value1", "database_setup_scripts_path": "value2"}
+    valid_config = {
+        "database_path": "value1",
+        "database_setup_scripts_path": "value2",
+        "input_data_path": "value3",
+        "output_data_path": "value4",
+    }
     config = Config(**valid_config)
     assert config.database_path == valid_config["database_path"]
     assert (
@@ -26,6 +31,8 @@ def test_invalid_attribute_type():
     invalid_attr_type_config = {
         "database_path": "value1",
         "database_setup_scripts_path": 123,
+        "input_data_path": "value3",
+        "output_data_path": "value4",
     }
     with pytest.raises(ValidationError):
         Config(**invalid_attr_type_config)
