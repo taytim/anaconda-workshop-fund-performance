@@ -38,8 +38,8 @@ def test_initialise_database(mock_open, mock_listdir, mock_exists):
         initialise_database("/fake/path/db.sqlite", "/fake/path/scripts")
     mock_exists.assert_called_once_with("/fake/path/db.sqlite")
     mock_listdir.assert_called_once_with("/fake/path/scripts")
-    mock_open.assert_any_call("/fake/path/scripts\\script1.sql", "r")
-    mock_open.assert_any_call("/fake/path/scripts\\script2.sql", "r")
+    mock_open.assert_any_call("/fake/path/scripts/script1.sql", "r")
+    mock_open.assert_any_call("/fake/path/scripts/script2.sql", "r")
     assert mock_open.call_count == 2
     mock_connect_to_database.executescript.assert_any_call("CREATE TABLE test_table;")
     mock_connect_to_database.executescript.assert_any_call(
