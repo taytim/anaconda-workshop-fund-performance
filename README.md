@@ -85,4 +85,16 @@ poetry run ruff check .
 poetry run ruff format .
 ```
 
-## 
+## Roadmap
+Production Readiness
+- [] Refactor to have a proper entrypoint rather than relying on a shell script
+- [] Reduce code smells (e.g. further breakdown long methods, better exception handling)
+- [] Include ingestion/data quality checks
+- [] Perform incremental ingestion of external fund data
+Scalability
+- [] Process by files/chunks
+- [] Minimise footprint of DataFrames
+- [] Utilise parallel processing / distributed processing
+- [] Pushdown processing to Database
+- [] Consider BI tool or Database view for report generation
+- [] Physicalise report generation view if performance is a concern
