@@ -45,7 +45,8 @@ def clean_fund_name(fund_name_raw: str) -> str:
         str: The cleaned fund name.
     """
     split_name = re.split(r"[\s\-_.]+", fund_name_raw)
-    return split_name[-1].title() if split_name else None
+    end_part = split_name[-1].strip() if split_name else None
+    return end_part.title() if end_part.isalnum() else None
 
 
 def clean_date(date_raw: str) -> str:
@@ -100,6 +101,7 @@ def parse_filename(filename: str) -> tuple[str, str]:
         ValueError: If the filename does not contain a valid fund name or date.
     """
     base_file_name = os.path.splitext(filename)[0]
+    assert len(base_file_name.split(".")) == 2, f"Invalid filename format: {filename}"
     fund_name_raw = base_file_name.split(".")[0]
     date_raw = base_file_name.split(".")[1]
     fund_name = clean_fund_name(fund_name_raw)
@@ -213,9 +215,19 @@ def process_fund_data(
         load_data_to_db(database_path, fund_holdings_table_name, df_combined)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """
+    Main function to run the fund data processing.
+
+    Returns:
+        None
+    """
     logger = Utils.setup_logger()
     logger.info("Starting fund data processing.")
     database_path, input_data_path, fund_holdings_table_name = get_config_n_constant()
     process_fund_data(database_path, input_data_path, fund_holdings_table_name)
     logger.info("Fund data processing completed.")
+
+
+if __name__ == "__main__":
+    main()

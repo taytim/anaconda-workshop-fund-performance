@@ -11,6 +11,8 @@ def test_load_config_success():
     mock_config_data = {
         "database_path": "/fake/path/db.sqlite",
         "database_setup_scripts_path": "/fake/path/scripts",
+        "input_data_path": "/fake/path/input",
+        "output_data_path": "/fake/path/output",
     }
     yaml_str = yaml.dump(mock_config_data)
     with patch("builtins.open", mock_open(read_data=yaml_str)):

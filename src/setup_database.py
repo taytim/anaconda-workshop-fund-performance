@@ -1,6 +1,7 @@
 import argparse
 import logging
 import os
+from pathlib import Path
 from utils.utils import Utils
 
 
@@ -38,7 +39,9 @@ def initialise_database(
     if not os.path.exists(database_path):
         conn = Utils.connect_to_database(database_path)
         for script_file in os.listdir(database_setup_scripts_path):
-            script_path = os.path.join(database_setup_scripts_path, script_file)
+            script_path = Path(
+                os.path.join(database_setup_scripts_path, script_file)
+            ).as_posix()
             with open(script_path, "r") as script:
                 conn.executescript(script.read())
         logger.info(f"Database created at {database_path}")
@@ -46,7 +49,13 @@ def initialise_database(
         logger.info(f"Database already exists at {database_path}")
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """
+    Main function to set up the SQLite database.
+
+    Returns:
+        None
+    """
     parser = argparse.ArgumentParser(description="Setup the SQLite database.")
     parser.add_argument(
         "--recreate",
@@ -58,3 +67,7 @@ if __name__ == "__main__":
     database_path, database_setup_scripts_path = get_db_config()
     initialise_database(database_path, database_setup_scripts_path, args.recreate)
     logger.info("Database setup completed.")
+
+
+if __name__ == "__main__":
+    main()
