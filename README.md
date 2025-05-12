@@ -88,6 +88,7 @@ poetry run ruff format .
 ## Roadmap
 Production Readiness
 - [] Refactor to have a proper entrypoint rather than relying on a shell script
+- [] Reduce clutter in folder structure
 - [] Reduce code smells (e.g. further breakdown long methods, better exception handling)
 - [] Include ingestion/data quality checks
 - [] Perform incremental ingestion of external fund data
