@@ -1,5 +1,6 @@
 import logging
 from models.config import Config
+import polars as pl
 import re
 import sqlite3
 import yaml
@@ -76,3 +77,21 @@ class Utils:
             str: The converted string in screaming snake case.
         """
         return re.sub(r"[^\w]+", "_", input.upper())
+
+    @staticmethod
+    def get_data_from_database(
+        conn: sqlite3.Connection, table_name: str
+    ) -> pl.DataFrame:
+        """
+        Retrieves a DataFrame from the SQLite database for the interested table.
+
+        Args:
+            conn (sqlite3.Connection): SQLite connection object.
+            table_name (str): Name of the table to retrieve data from.
+
+        Returns:
+            pl.DataFrame: DataFrame containing the data from the specified table.
+        """
+        query = f"SELECT * FROM {table_name}"
+        df = pl.read_database(query, conn, infer_schema_length=None)
+        return df
