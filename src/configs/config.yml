@@ -4,4 +4,4 @@ database_setup_scripts_path : './db_scripts'
 
 # Data related paths
 input_data_path: './input/external-funds'
-output_data_path: './data/output'
+output_data_path: './output'

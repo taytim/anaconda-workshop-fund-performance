@@ -23,7 +23,7 @@ def get_config_n_constant() -> tuple[str, str, str]:
         - Fund holdings table name from constants.
 
     Returns:
-        tuple[str, str, str]: A tuple containing the database path and the table name for fund holdings data.
+        tuple[str, str, str]: A tuple containing the database path, input data path, and the table name for fund holdings data.
     """
     config = Utils.load_config()
     database_path = config.database_path
