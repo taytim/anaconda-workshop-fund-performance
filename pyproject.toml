@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "fund-performance"
+version = "0.1.0"
+description = "Fund Performance Report Generator"
+authors = ["Timothy Tay <timothytaykokhooi@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.13"
+pydantic = "^2.11.4"
+pytest-cov = "^6.1.1"
+pandera = {extras = ["polars"], version = "^0.23.1"}
+polars-lts-cpu = "^1.29.0"
+sqlalchemy = "^2.0.40"
+pyarrow = "^20.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+ruff = "^0.11.9"
+pre-commit = "^4.2.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "tests/*"
+]
